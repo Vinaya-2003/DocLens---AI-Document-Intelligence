@@ -45,66 +45,6 @@ from rag_pipeline import (
 # Interface lives in app.py
 
 # ============================================================
-# PASSWORD PROTECTION
-# Simple password gate before anyone can use the app
-# The password is stored in .streamlit/secrets.toml
-# Streamlit Cloud reads this file securely
-# ============================================================
-
-def check_password():
-    # This function shows a password input
-    # Returns True if correct password entered
-    # Returns False if wrong or not entered yet
-
-    def password_entered():
-        # Called when user clicks Submit
-        # Checks if entered password matches our secret
-        if st.session_state["password"] == st.secrets["password"]:
-            st.session_state["password_correct"] = True
-            # Delete password from memory after checking
-            del st.session_state["password"]
-        else:
-            st.session_state["password_correct"] = False
-
-    # First visit — show the login form
-    if "password_correct" not in st.session_state:
-        st.markdown("## 🔍 DocLens")
-        st.markdown("*See inside any document. Instantly.*")
-        st.divider()
-        st.text_input(
-            "Enter password to access DocLens:",
-            type="password",
-            on_change=password_entered,
-            key="password",
-            placeholder="Enter access password"
-        )
-        st.caption("Contact vinayakallivalappil@gmail.com for access")
-        return False
-
-    # Wrong password entered — show error
-    elif not st.session_state["password_correct"]:
-        st.markdown("## 🔍 DocLens")
-        st.divider()
-        st.text_input(
-            "Enter password to access DocLens:",
-            type="password",
-            on_change=password_entered,
-            key="password",
-            placeholder="Enter access password"
-        )
-        st.error("❌ Incorrect password. Please try again.")
-        return False
-
-    # Correct password — allow access
-    else:
-        return True
-
-# Stop the app here if password is wrong
-# Everything below this line only runs after correct password
-if not check_password():
-    st.stop()
-
-# ============================================================
 # PAGE CONFIGURATION
 # Must be the very first Streamlit command
 # Sets the browser tab title icon and page layout
