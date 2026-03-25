@@ -1,3 +1,6 @@
+# Live Demo
+doclens---ai-document-intelligence-gr2f26cvy9fkxd45njxn4a.streamlit.app
+
 # 🔍 DocLens — See Inside Any Document. Instantly.
 
 > An AI powered document intelligence web application that lets you upload any PDF and ask questions about it in plain English. No reading required.
